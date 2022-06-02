@@ -204,7 +204,7 @@ AFRAME.registerComponent("networked-drawing", {
     };
 
     const glb = await new Promise(resolve => {
-      exporter.parse(mesh, resolve, {
+      exporter.parse(mesh, resolve, undefined, {
         binary: true,
         includeCustomExtensions: true
       });
