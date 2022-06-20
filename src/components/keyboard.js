@@ -14,7 +14,6 @@
     },
   
     init() {
-        alert("yo")
         this.keyboardKeys = {};
 
         this.activeMode = 'normal'; // 'normal', 'shift', 'alt'
