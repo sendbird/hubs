@@ -149,6 +149,8 @@ import "./components/keyboard-input";
 import "./components/keyboard";
 import "./components/keyboard-button";
 import "./components/channel-list";
+import "./components/message-list";
+
 
 
 
