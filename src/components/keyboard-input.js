@@ -1,6 +1,5 @@
 AFRAME.registerComponent("keyboard-input", {
     init() {
-        alert("init")
       this.currentInput = "";
       const keyboardInput = document.createElement('a-entity');
   

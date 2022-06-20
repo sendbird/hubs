@@ -146,6 +146,10 @@ import "./components/avatar-inspect-collider";
 import "./components/video-texture-target";
 import "./components/mirror";
 import "./components/keyboard-input";
+import "./components/keyboard";
+import "./components/keyboard-button";
+
+
 
 
 import ReactDOM from "react-dom";
