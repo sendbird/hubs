@@ -145,6 +145,8 @@ import "./components/avatar-audio-source";
 import "./components/avatar-inspect-collider";
 import "./components/video-texture-target";
 import "./components/mirror";
+import "./components/keyboard-input";
+
 
 import ReactDOM from "react-dom";
 import React from "react";

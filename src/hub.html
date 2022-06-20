@@ -1338,6 +1338,12 @@
                 <a-entity text="value:View your desktop to continue; textAlign:center;" position="0 0 0.001"></a-entity>
             </a-entity>
         </a-entity>
+        <a-entity class="ui interactable-ui vr-notice chat" follow-in-fov="target: #avatar-pov-node; offset: 0 0 -0.8; angle: 0;speed: 0.03;" visible="true">
+            <a-entity
+            keyboard-input
+            position="-0.3 -0.2 0.05"
+            ></a-entity>
+        </a-entity>
         <a-entity class="ui interactable-ui media-mirror" follow-in-fov="target: #avatar-pov-node; offset: 0 0 -0.8; angle: 39;" visible="false">
             <a-entity id="media-mirror-target" position="0 0 -0.075"></a-entity>
             <a-entity class="media-mirror-close" close-mirrored-media-button mixin="rounded-button" is-remote-hover-target tags="singleActionButton: true;" position="0 -0.35 0.001" scale="0.65 0.65 0.65">
