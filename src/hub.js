@@ -1174,6 +1174,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   events.on(`hub:join`, ({ key, meta }) => {
+    console.log('555', key)
     scene.emit("presence_updated", {
       sessionId: key,
       profile: meta.profile,
