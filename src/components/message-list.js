@@ -1,3 +1,5 @@
+import sendbird from '../utils/sendbird';
+
 const MESSAGE_LIST_WIDTH = 0.5;
 const LINE_HEIGHT = 0.04;
 const CONTAINER_HEIGHT = LINE_HEIGHT*15;
@@ -40,22 +42,23 @@ AFRAME.registerComponent("message-list", {
 
       this.el.appendChild(text);
     }
-    this.el.sceneEl.addEventListener("incoming-message", (e)=>{
-      appendMessage(e, {name: 'James', time: '17:29'})
+    // this.el.sceneEl.addEventListener("incoming-message", (e)=>{
+    //   appendMessage(e, {name: 'James', time: '17:29'})
+
+    // });
+    this.el.sceneEl.addEventListener("start-chat", async(e)=>{
+      await sendbird.getMessages(sendbird.channels[3]);
+      renderMessages(sendbird.messages);
+      this.el.setAttribute("visible","true");
+      console.log('234234234 init message list');
+      console.log(sendbird.currentChannel);
 
     });
-    this.el.sceneEl.addEventListener("start-chat", (e)=>{
-      this.el.setAttribute("visible","true")
 
-    });
-
-    // appendMessage({detail:{value: "This is a great conference"}},{name: 'Bob', time: '16:09'});
-    // setTimeout(()=>{
-    //   appendMessage({detail:{value: "Anyone want to meetup for CSS talk?"}},{name: 'Cristina', time: '16:15'});
-
-    // },1000)
-
-    // appendMessage({detail:{value: "234234234"}});
+    const renderMessages = (messages)=>{
+      console.log('render messages');
+      console.log(messages)
+    }
 
   },
 

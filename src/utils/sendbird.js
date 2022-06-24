@@ -1,21 +1,41 @@
 
 import SendbirdChat from '@sendbird/chat';
 import {
-    OpenChannelModule,
-    OpenChannelHandler,
-    OpenChannelCreateParams,
-    OpenChannelUpdateParams
-} from '@sendbird/chat/openChannel';
-
+    UserMessageCreateParams,
+    UserMessageUpdateParams,
+    FileMessageCreateParams
+} from '@sendbird/chat/message';
 import {
     GroupChannelModule,
+    GroupChannelHandler,
 } from '@sendbird/chat/groupChannel';
+
+console.log(GroupChannelModule, UserMessageCreateParams);
+
 
 const sendbird = {
     sdk:null,
+    currentChannel:null,
+    channels:null,
+    messages:[],
+    getMessages: async (channel) => {
+        const messageListParams = {};
+        messageListParams.nextResultSize = 20;
+        const messages = await channel.getMessagesByTimestamp(0, messageListParams);
+        sendbird.messages = messages;
+        console.log(messages);
+
+        return messages;
+    },
     createUser: () => {
         // call senbird hubs /user endpoint with name and session id
 
+    },
+    getChannels: async () => {
+        const groupChannelQuery = sendbird.sdk.groupChannel.createPublicGroupChannelListQuery({ limit: 30, includeEmpty: true });
+        const channels = await groupChannelQuery.next();
+        sendbird.channels = channels;
+        return sendbird.channels;
     },
     getSdk: async () => {
         if(sendbird.sdk){
@@ -26,6 +46,7 @@ const sendbird = {
             localCacheEnabled: false,
             modules: [new GroupChannelModule()]
         });
+        sendbird.sdk = sendbirdChat;
         return sendbirdChat;
     }
 }

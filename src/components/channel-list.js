@@ -32,8 +32,7 @@ AFRAME.registerComponent("channel-list", {
 
 
       try {
-        const groupChannelQuery = sendbirdChat.groupChannel.createPublicGroupChannelListQuery({ limit: 30, includeEmpty: true });
-        const channels = await groupChannelQuery.next();
+        const channels = await sendbird.getChannels();
         setUpUI(channels);
 
 
@@ -62,8 +61,8 @@ AFRAME.registerComponent("channel-list", {
       submitButton.setAttribute('text-button', 'backgroundHoverColor', '#1a8cff');
       submitButton.setAttribute('scale', `${CHANNEL_LIST_WIDTH} ${CHANNEL_ITEM_HEIGHT} 0.0005`);
       submitButton.setAttribute('position', `0 ${SUBMIT_BUTTON_TOP} 0.0006`);
-      submitButton.object3D.addEventListener("interact", ()=>{
-        // save current chat in sb utility
+      submitButton.object3D.addEventListener("interact", async ()=>{
+        sendbird.currentChannel = channels[3];
         this.el.sceneEl.emit("start-chat",{});
         this.el.setAttribute("visible","false")
   
