@@ -18,15 +18,14 @@ AFRAME.registerComponent("channel-list", {
       }
     });
     const setUpSendBird = async (sessionId) => {
-
       const sendbirdChat = await sendbird.getSdk();
+      const response = await sendbird.createUser(sessionId);
 
       try{
-        await sendbirdChat.connect(sessionId);
+        await sendbirdChat.connect(sessionId, response.access_token);
       }catch(e){
         console.log("sb connection failed", e)
       }
-      // set local suer info etc
 
       await sendbirdChat.setChannelInvitationPreference(true);
 

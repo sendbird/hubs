@@ -6,7 +6,6 @@ import {
     GroupChannelHandler,
 } from '@sendbird/chat/groupChannel';
 
-console.log(GroupChannelModule, UserMessageCreateParams);
 
 
 const sendbird = {
@@ -23,8 +22,18 @@ const sendbird = {
 
         return messages;
     },
-    createUser: () => {
-        // call senbird hubs /user endpoint with name and session id
+    createUser: async (sessionId) => {
+        console.log('session id ', sessionId)
+      // set local suer info etc
+      const response = await fetch("http://localhost:3000/user", {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({sessionId: sessionId, name: 'avatar name'})
+      })
+
+      return response.json();
 
     },
     getChannels: async () => {
