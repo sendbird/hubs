@@ -23,8 +23,8 @@ AFRAME.registerComponent("message-list", {
 
 
     this.el.appendChild(messageListContainer);
-    const appendMessage = (e, info) =>{
-      const message = e.detail.value;
+    const appendMessage = (info) =>{
+      const message = info.message;
 
       const yPositionOfText = (CONTAINER_HEIGHT/2)-((LINE_HEIGHT/2)*messages.length)-HEADER_HEIGHT;
 
@@ -32,7 +32,6 @@ AFRAME.registerComponent("message-list", {
       messages.push(message);
 
 
-      console.log('--e', e.detail.value)
 
       text.setAttribute('text', `value: ${info.time}  ${info.name}: ${message}; textAlign:center; width: 10; height:10; color: black; opacity:1;`);
       text.setAttribute('position', `0 ${yPositionOfText} 0.001`);
@@ -50,14 +49,16 @@ AFRAME.registerComponent("message-list", {
       await sendbird.getMessages(sendbird.channels[3]);
       renderMessages(sendbird.messages);
       this.el.setAttribute("visible","true");
-      console.log('234234234 init message list');
-      console.log(sendbird.currentChannel);
 
     });
 
     const renderMessages = (messages)=>{
-      console.log('render messages');
-      console.log(messages)
+      messages.forEach((message) => {
+        const name = message.messageType === 'admin' ? 'admin' : 'user-nickname';
+        appendMessage({message:message.message, name, time: message.createdAt});
+
+      })
+      // loop and append messages
     }
 
   },

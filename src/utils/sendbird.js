@@ -1,10 +1,6 @@
 
 import SendbirdChat from '@sendbird/chat';
-import {
-    UserMessageCreateParams,
-    UserMessageUpdateParams,
-    FileMessageCreateParams
-} from '@sendbird/chat/message';
+
 import {
     GroupChannelModule,
     GroupChannelHandler,

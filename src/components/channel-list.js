@@ -26,7 +26,7 @@ AFRAME.registerComponent("channel-list", {
       }catch(e){
         console.log("sb connection failed", e)
       }
-
+      // set local suer info etc
 
       await sendbirdChat.setChannelInvitationPreference(true);
 
