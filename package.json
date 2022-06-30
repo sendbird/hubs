@@ -76,7 +76,7 @@
     "@mozillareality/easing-functions": "^0.1.1",
     "@mozillareality/three-batch-manager": "github:mozillareality/three-batch-manager#master",
     "@popperjs/core": "^2.4.4",
-    "@sendbird/chat": "^4.0.0-beta-10",
+    "@sendbird/chat": "^4.0.2",
     "aframe": "github:mozillareality/aframe#hubs/master",
     "aframe-rounded": "^1.0.3",
     "aframe-slice9-component": "github:takahirox/aframe-slice9-component#AlphaTest",

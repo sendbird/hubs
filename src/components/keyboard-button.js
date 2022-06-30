@@ -13,12 +13,13 @@ AFRAME.registerComponent("keyboard-button", {
             return
           }
           const userMessageParams = {};
-          userMessageParams.message = "test message";
-          console.log(sendbird);
+          userMessageParams.message = sendbird.currentMessage;
           //need to do all that local setup stuff.
           // might need to create a user first
           sendbird.currentChannel.sendUserMessage(userMessageParams)
           .onSucceeded((message) => {
+            sendbird.currentMessage = "";
+
              console.log("message sent")
 
           })
@@ -32,6 +33,7 @@ AFRAME.registerComponent("keyboard-button", {
         }else{
           console.log("clicked")
           let value = keyboardButtonText.value;
+          sendbird.currentMessage += keyboardButtonText.value;
           this.el.sceneEl.emit("key-input", { value });
         }
   

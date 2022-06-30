@@ -7,18 +7,23 @@ import {
 } from '@sendbird/chat/groupChannel';
 
 
+// SendbirdChat.setLogLevel(SendbirdChat.LogLevel.VERBOSE);
 
 const sendbird = {
     sdk:null,
     currentChannel:null,
+    currentMessage:"",
     channels:null,
     messages:[],
     getMessages: async (channel) => {
         const messageListParams = {};
         messageListParams.nextResultSize = 20;
+        console.log('channel.getMessages', channel);
         const messages = await channel.getMessagesByTimestamp(0, messageListParams);
-        sendbird.messages = messages;
         console.log(messages);
+        sendbird.messages = messages;
+
+
 
         return messages;
     },
@@ -30,7 +35,7 @@ const sendbird = {
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify({sessionId: sessionId, name: 'avatar name'})
+        body: JSON.stringify({sessionId: sessionId, name: sessionId})
       })
 
       return response.json();

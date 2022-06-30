@@ -45,9 +45,12 @@ AFRAME.registerComponent("message-list", {
     //   appendMessage(e, {name: 'James', time: '17:29'})
 
     // });
+    const sendbirdSdk = sendbird.sdk;
     this.el.sceneEl.addEventListener("start-chat", async(e)=>{
       await sendbird.getMessages(sendbird.channels[3]);
+      console.log('sendbird.messages', sendbird.messages);
       renderMessages(sendbird.messages);
+      console.log('- - - ', sendbirdSdk);
       this.el.setAttribute("visible","true");
 
     });

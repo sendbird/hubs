@@ -23,15 +23,17 @@ AFRAME.registerComponent("channel-list", {
 
       try{
         await sendbirdChat.connect(sessionId, response.access_token);
+
       }catch(e){
         console.log("sb connection failed", e)
       }
 
-      await sendbirdChat.setChannelInvitationPreference(true);
+      // await sendbirdChat.setChannelInvitationPreference(true);
 
 
       try {
         const channels = await sendbird.getChannels();
+        console.log(channels);
         setUpUI(channels);
 
 
@@ -62,6 +64,7 @@ AFRAME.registerComponent("channel-list", {
       submitButton.setAttribute('position', `0 ${SUBMIT_BUTTON_TOP} 0.0006`);
       submitButton.object3D.addEventListener("interact", async ()=>{
         sendbird.currentChannel = channels[3];
+        console.log(sendbird.currentChannel);
         this.el.sceneEl.emit("start-chat",{});
         this.el.setAttribute("visible","false")
   
