@@ -3,7 +3,6 @@ import SendbirdChat from '@sendbird/chat';
 
 import {
     GroupChannelModule,
-    GroupChannelHandler,
 } from '@sendbird/chat/groupChannel';
 
 

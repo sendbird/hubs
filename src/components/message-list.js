@@ -1,3 +1,6 @@
+import {
+  GroupChannelHandler,
+} from '@sendbird/chat/groupChannel';
 import sendbird from '../utils/sendbird';
 
 const MESSAGE_LIST_WIDTH = 0.5;
@@ -45,12 +48,21 @@ AFRAME.registerComponent("message-list", {
     //   appendMessage(e, {name: 'James', time: '17:29'})
 
     // });
-    const sendbirdSdk = sendbird.sdk;
-    this.el.sceneEl.addEventListener("start-chat", async(e)=>{
+    const channelHandler = new GroupChannelHandler();
+
+    this.el.sceneEl.addEventListener("start-chat", async(e) => {
       await sendbird.getMessages(sendbird.channels[3]);
-      console.log('sendbird.messages', sendbird.messages);
       renderMessages(sendbird.messages);
-      console.log('- - - ', sendbirdSdk);
+      channelHandler.onMessageReceived = (channel, message) => {
+        console.log('message received', message.sender?.nickname);
+        sendbird.messages.push(message);
+        const name = message.sender?.nickname ? message.sender?.nickname : 'admin';
+
+        appendMessage({message:message.message, name, time: message.createdAt});
+      };
+
+      sendbird.sdk.groupChannel.addGroupChannelHandler("234234", channelHandler);
+
       this.el.setAttribute("visible","true");
 
     });
