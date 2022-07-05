@@ -29,7 +29,7 @@ const sendbird = {
     createUser: async (sessionId) => {
         console.log('session id ', sessionId)
       // set local suer info etc
-      const response = await fetch("http://localhost:3000/user", {
+      const response = await fetch("https://codesandbox.io/s/sad-banzai-bq84b4/user", {
         headers: {
           'Content-Type': 'application/json'
         },
