@@ -262,7 +262,6 @@ AFRAME.registerComponent("teleporter", {
       if (!this.hit || this.timeTeleporting < DRAW_TIME_MS) {
         return;
       }
-
       this.characterController.teleportTo(this.hitPoint);
 
       sfx.playSoundOneShot(SOUND_TELEPORT_END);

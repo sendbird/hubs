@@ -128,7 +128,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
       xform: xforms.falling
     },
     {
-      src: { value: paths.device.keyboard.key("p") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: togglePenWithP },
       xform: xforms.rising
     },

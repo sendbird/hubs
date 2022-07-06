@@ -5,6 +5,7 @@ AFRAME.registerComponent("keyboard-button", {
       this.keyboardButton = this.el.querySelector('.keyboard-button');
       this.keyCode = this.keyboardButton.getAttribute('key-code');
       this.keyValue = this.keyboardButton.getAttribute('key-value');
+      this.characterController = this.el.sceneEl.systems["hubs-systems"].characterController;
 
       this.keyboardButtonText = this.keyboardButton.getAttribute('text');
 
@@ -14,9 +15,24 @@ AFRAME.registerComponent("keyboard-button", {
         switch(this.keyCode) {
           case "13":
           case "06":
+
             if(!sendbird.currentChannel){
               return
             }
+            const worldPos = new THREE.Vector3();
+            worldPos.setFromMatrixPosition(this.el.object3D.matrixWorld);
+            console.log(worldPos);
+            if(sendbird.currentMessage.includes('teleport')){
+              console.log('this.characterController')
+              const mockLocation = { x: 0.7907745144970595, y: -0.0007149681729433964, z: 1.0730591885848875 };
+              const mockLocation2 = { x: 7.567290102942657, y: 1.1735722732951042, z: -2.799716414112678 };
+              console.log(this.characterController);
+              this.characterController.teleportTo(mockLocation2);
+              sendbird.currentMessage += " "
+              this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });
+              break;
+            }
+
             const userMessageParams = {};
             userMessageParams.message = sendbird.currentMessage;
             sendbird.currentChannel.sendUserMessage(userMessageParams)
@@ -31,7 +47,6 @@ AFRAME.registerComponent("keyboard-button", {
                 console.log("failed")
             });
    
-    
             this.el.sceneEl.emit("key-submit");
             break;
           case "8":
