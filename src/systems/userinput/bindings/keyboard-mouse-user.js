@@ -55,10 +55,10 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: {
-        w: paths.device.keyboard.key("w"),
-        a: paths.device.keyboard.key("a"),
-        s: paths.device.keyboard.key("s"),
-        d: paths.device.keyboard.key("d")
+        w: paths.device.keyboard.key(""),
+        a: paths.device.keyboard.key(""),
+        s: paths.device.keyboard.key(""),
+        d: paths.device.keyboard.key("")
       },
       dest: { vec2: wasd_vec2 },
       xform: xforms.wasd_to_vec2
@@ -93,12 +93,12 @@ export const keyboardMouseUserBindings = addSetsToBindings({
       xform: xforms.falling
     },
     {
-      src: { value: paths.device.keyboard.key("q") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: paths.actions.snapRotateLeft },
       xform: xforms.rising
     },
     {
-      src: { value: paths.device.keyboard.key("g") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: paths.actions.toggleFly },
       xform: xforms.rising
     },
@@ -108,7 +108,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
       xform: xforms.rising
     },
     {
-      src: { value: paths.device.keyboard.key("e") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: paths.actions.snapRotateRight },
       xform: xforms.rising
     },
@@ -149,12 +149,12 @@ export const keyboardMouseUserBindings = addSetsToBindings({
       priority: 100
     },
     {
-      src: { value: paths.device.keyboard.key("c") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: paths.actions.toggleCamera },
       xform: xforms.rising
     },
     {
-      src: { value: paths.device.keyboard.key("x") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: paths.actions.takeSnapshot },
       xform: xforms.copy
     },
@@ -203,7 +203,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: {
-        value: paths.device.keyboard.key("m")
+        value: paths.device.keyboard.key("")
       },
       dest: {
         value: paths.actions.muteMic
@@ -212,7 +212,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: {
-        value: paths.device.keyboard.key("t")
+        value: paths.device.keyboard.key("")
       },
       dest: {
         value: paths.actions.focusChat
@@ -236,7 +236,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("1")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+1" },
       xform: xforms.copyIfTrue
@@ -249,7 +249,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("2")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+2" },
       xform: xforms.copyIfTrue
@@ -262,7 +262,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("3")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+3" },
       xform: xforms.copyIfTrue
@@ -275,7 +275,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("4")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+4" },
       xform: xforms.copyIfTrue
@@ -288,7 +288,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("5")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+5" },
       xform: xforms.copyIfTrue
@@ -301,7 +301,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("6")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+6" },
       xform: xforms.copyIfTrue
@@ -314,7 +314,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("7")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+7" },
       xform: xforms.copyIfTrue
@@ -327,7 +327,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("8")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/control+8" },
       xform: xforms.copyIfTrue
@@ -339,7 +339,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: {
-        value: paths.device.keyboard.key("l")
+        value: paths.device.keyboard.key("")
       },
       dest: {
         value: paths.actions.logDebugFrame
@@ -348,7 +348,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     },
     {
       src: {
-        value: paths.device.keyboard.key("k")
+        value: paths.device.keyboard.key("")
       },
       dest: {
         value: paths.actions.logInteractionState
@@ -376,14 +376,14 @@ export const keyboardMouseUserBindings = addSetsToBindings({
       priority: 100
     },
     {
-      src: { value: paths.device.keyboard.key("o") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: paths.actions.nextCameraMode },
       xform: xforms.rising
     },
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("1")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/notcontrol+1" },
       xform: xforms.copyIfFalse
@@ -396,7 +396,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("2")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/notcontrol+2" },
       xform: xforms.copyIfFalse
@@ -409,7 +409,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("3")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/notcontrol+3" },
       xform: xforms.copyIfFalse
@@ -422,7 +422,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("4")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/notcontrol+4" },
       xform: xforms.copyIfFalse
@@ -435,7 +435,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("5")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/notcontrol+5" },
       xform: xforms.copyIfFalse
@@ -448,7 +448,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("6")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/notcontrol+6" },
       xform: xforms.copyIfFalse
@@ -461,7 +461,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
     {
       src: {
         bool: paths.device.keyboard.key("control"),
-        value: paths.device.keyboard.key("7")
+        value: paths.device.keyboard.key("")
       },
       dest: { value: "/var/notcontrol+7" },
       xform: xforms.copyIfFalse
@@ -472,7 +472,7 @@ export const keyboardMouseUserBindings = addSetsToBindings({
       xform: xforms.rising
     },
     {
-      src: { value: paths.device.keyboard.key("i") },
+      src: { value: paths.device.keyboard.key("") },
       dest: { value: paths.actions.startInspectingSelf },
       xform: xforms.rising
     }

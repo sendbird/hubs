@@ -19,8 +19,7 @@ AFRAME.registerComponent("keyboard-input", {
       this.el.appendChild(keyboardInput);
       this.el.appendChild(keyboardInputText);
       this.el.sceneEl.addEventListener("key-input", (e)=>{
-        console.log('--e', e.detail.value)
-        this.currentInput = this.currentInput + e.detail.value;
+        this.currentInput = e.detail.value;
         keyboardInputText.setAttribute('text', `value: ${this.currentInput};`);
   
       });
