@@ -64,7 +64,6 @@
             const key = options.key;
             const width = key.size.split(' ')[0];
             const height = key.size.split(' ')[1];
-            console.log("--keyboard inited");
             const buttonContainer = document.createElement('a-entity');
             buttonContainer.setAttribute('sprite', '');
             buttonContainer.setAttribute('is-remote-hover-target', '');
@@ -85,9 +84,6 @@
             text.setAttribute('scale', '3 3 3');
             text.setAttribute('class', 'keyboard-button');
 
-            // text.setAttribute('geometry', `primitive: plane; width: ${width}; height: ${height}`);
-            // text.setAttribute('width', `10`);
-            // text.setAttribute('height', `10`);
 
             buttonContainer.appendChild(button);  
     

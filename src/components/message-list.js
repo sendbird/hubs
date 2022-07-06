@@ -73,7 +73,7 @@ AFRAME.registerComponent("message-list", {
       this.el.querySelectorAll('.message-item').forEach(e => e.remove());
 
       messages.forEach((message, index) => {
-        const name = message.messageType === 'admin' ? 'admin' : 'user-nickname';
+        const name = message.messageType === 'admin' ? 'admin' : message.sender.nickname;
         appendMessage({message:message.message, name, time: message.createdAt}, index);
 
       })

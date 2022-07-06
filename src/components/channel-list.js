@@ -11,18 +11,20 @@ AFRAME.registerComponent("channel-list", {
   init() {
     this.sessionId = null;
     this.el.sceneEl.addEventListener("presence_updated", (info) => {
+      console.log('info')
+      console.log(info)
       const sessionId = info.detail.sessionId;
       if(this.sessionId !== sessionId){
         this.sessionId = sessionId;
-        setUpSendBird(sessionId); 
+        setUpSendBird(info.detail.profile); 
       }
     });
-    const setUpSendBird = async (sessionId) => {
+    const setUpSendBird = async (profile) => {
       const sendbirdChat = await sendbird.getSdk();
-      const response = await sendbird.createUser(sessionId);
+      const response = await sendbird.createUser(profile.avatarId, profile.displayName);
 
       try{
-        await sendbirdChat.connect(sessionId, response.access_token);
+        await sendbirdChat.connect(profile.avatarId, response.access_token);
 
       }catch(e){
         console.log("sb connection failed", e)

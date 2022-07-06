@@ -16,23 +16,18 @@ const sendbird = {
     getMessages: async (channel) => {
         const messageListParams = {};
         messageListParams.nextResultSize = 20;
-        console.log('channel.getMessages', channel);
         const messages = await channel.getMessagesByTimestamp(0, messageListParams);
-        console.log(messages);
         sendbird.messages = messages;
-
-
-
         return messages;
     },
-    createUser: async (sessionId) => {
+    createUser: async (id, displayName) => {
       // set local suer info etc
       const response = await fetch("http://localhost:3000/user", {
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify({sessionId: sessionId, name: sessionId})
+        body: JSON.stringify({sessionId: id, name: displayName})
       })
 
       return response.json();
