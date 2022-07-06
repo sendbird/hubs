@@ -19,7 +19,8 @@ AFRAME.registerComponent("keyboard-button", {
           sendbird.currentChannel.sendUserMessage(userMessageParams)
           .onSucceeded((message) => {
             sendbird.currentMessage = "";
-
+            sendbird.messages.push(message);
+            this.el.sceneEl.emit("message-sent");
              console.log("message sent")
 
           })

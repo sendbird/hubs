@@ -6,7 +6,6 @@ import {
 } from '@sendbird/chat/groupChannel';
 
 
-// SendbirdChat.setLogLevel(SendbirdChat.LogLevel.VERBOSE);
 
 const sendbird = {
     sdk:null,
@@ -27,9 +26,8 @@ const sendbird = {
         return messages;
     },
     createUser: async (sessionId) => {
-        console.log('session id ', sessionId)
       // set local suer info etc
-      const response = await fetch("https://codesandbox.io/s/sad-banzai-bq84b4/user", {
+      const response = await fetch("http://localhost:3000/user", {
         headers: {
           'Content-Type': 'application/json'
         },

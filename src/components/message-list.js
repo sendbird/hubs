@@ -2,6 +2,7 @@ import {
   GroupChannelHandler,
 } from '@sendbird/chat/groupChannel';
 import sendbird from '../utils/sendbird';
+import moment from 'moment';
 
 const MESSAGE_LIST_WIDTH = 0.5;
 const LINE_HEIGHT = 0.04;
@@ -19,27 +20,24 @@ AFRAME.registerComponent("message-list", {
     messageListContainer.setAttribute('scale', `${MESSAGE_LIST_WIDTH} ${CONTAINER_HEIGHT} 0`);
 
     const header = document.createElement('a-entity');
-    header.setAttribute('text', `value: FRONT END CHAT; textAlign:center; width: 10; height:10; color: black; opacity:1;`);
     header.setAttribute('position', `0 0.34 0.001`);
     header.setAttribute('scale', '0.4 0.4 0');
     this.el.appendChild(header);
 
 
     this.el.appendChild(messageListContainer);
-    const appendMessage = (info) =>{
+
+    const appendMessage = (info, index) =>{
       const message = info.message;
 
-      const yPositionOfText = (CONTAINER_HEIGHT/2)-((LINE_HEIGHT/2)*messages.length)-HEADER_HEIGHT;
+      const yPositionOfText = (CONTAINER_HEIGHT/2)-((LINE_HEIGHT/2)*index)-HEADER_HEIGHT;
 
       const text = document.createElement('a-entity');
-      messages.push(message);
 
-
-
-      text.setAttribute('text', `value: ${info.time}  ${info.name}: ${message}; textAlign:center; width: 10; height:10; color: black; opacity:1;`);
+      text.setAttribute('text', `value: ${moment(info.time).fromNow()}  ${info.name}: ${message}; textAlign:center; width: 10; height:10; color: black; opacity:1;`);
       text.setAttribute('position', `0 ${yPositionOfText} 0.001`);
       text.setAttribute('scale', '0.3 0.3 0');
-      text.setAttribute('class', 'keyboard-button');
+      text.setAttribute('class', 'message-item');
 
 
       this.el.appendChild(text);
@@ -51,28 +49,38 @@ AFRAME.registerComponent("message-list", {
     const channelHandler = new GroupChannelHandler();
 
     this.el.sceneEl.addEventListener("start-chat", async(e) => {
-      await sendbird.getMessages(sendbird.channels[3]);
+      header.setAttribute('text', `value: ${sendbird.currentChannel.name}; textAlign:center; width: 10; height:10; color: black; opacity:1;`);
+
+      await sendbird.getMessages(sendbird.currentChannel);
       renderMessages(sendbird.messages);
       channelHandler.onMessageReceived = (channel, message) => {
-        console.log('message received', message.sender?.nickname);
+        console.log('got message')
         sendbird.messages.push(message);
-        const name = message.sender?.nickname ? message.sender?.nickname : 'admin';
+        // const name = message.sender?.nickname ? message.sender?.nickname : 'admin';
+        renderMessages(sendbird.messages);
 
-        appendMessage({message:message.message, name, time: message.createdAt});
+        // appendMessage({message:message.message, name, time: message.createdAt});
       };
 
-      sendbird.sdk.groupChannel.addGroupChannelHandler("234234", channelHandler);
+      console.log("setup channel handler")
+      sendbird.sdk.groupChannel.addGroupChannelHandler("98u089", channelHandler);
 
       this.el.setAttribute("visible","true");
 
     });
 
     const renderMessages = (messages)=>{
-      messages.forEach((message) => {
+      this.el.querySelectorAll('.message-item').forEach(e => e.remove());
+
+      messages.forEach((message, index) => {
         const name = message.messageType === 'admin' ? 'admin' : 'user-nickname';
-        appendMessage({message:message.message, name, time: message.createdAt});
+        appendMessage({message:message.message, name, time: message.createdAt}, index);
 
       })
+
+      this.el.sceneEl.addEventListener("message-sent", async(e) => {
+        renderMessages(sendbird.messages);
+      });
       // loop and append messages
     }
 
