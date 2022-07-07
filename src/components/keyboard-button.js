@@ -21,13 +21,12 @@ AFRAME.registerComponent("keyboard-button", {
             }
             const worldPos = new THREE.Vector3();
             worldPos.setFromMatrixPosition(this.el.object3D.matrixWorld);
-            console.log(worldPos);
+
             if(sendbird.currentMessage.includes('teleport')){
-              console.log('this.characterController')
-              const mockLocation = { x: 0.7907745144970595, y: -0.0007149681729433964, z: 1.0730591885848875 };
-              const mockLocation2 = { x: 7.567290102942657, y: 1.1735722732951042, z: -2.799716414112678 };
-              console.log(this.characterController);
-              this.characterController.teleportTo(mockLocation2);
+              const targetUser = sendbird.currentMessage.split(" ")[1];
+              const targetUserLatestMessage = sendbird.messages.reverse().find((message)=>message.nickname === targetUser.nickname);
+
+              this.characterController.teleportTo(JSON.parse(targetUserLatestMessage.data));
               sendbird.currentMessage += " "
               this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });
               break;
@@ -35,6 +34,8 @@ AFRAME.registerComponent("keyboard-button", {
 
             const userMessageParams = {};
             userMessageParams.message = sendbird.currentMessage;
+            userMessageParams.data = JSON.stringify(worldPos);
+
             sendbird.currentChannel.sendUserMessage(userMessageParams)
             .onSucceeded((message) => {
               sendbird.currentMessage = "";
@@ -64,13 +65,7 @@ AFRAME.registerComponent("keyboard-button", {
             this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });
             // code block
         }
-        // if(this.keyCode === "06" || this.keyCode === "13"){
 
-        // }else{
-
-        // }
-  
-  
   
       };
       this.onHover = () => {
