@@ -4,7 +4,7 @@ import {
 import sendbird from '../utils/sendbird';
 import moment from 'moment';
 
-const MESSAGE_LIST_WIDTH = 0.5;
+const MESSAGE_LIST_WIDTH = 0.8;
 const LINE_HEIGHT = 0.04;
 const CONTAINER_HEIGHT = LINE_HEIGHT*15;
 const HEADER_HEIGHT = 0.02;
@@ -29,13 +29,20 @@ AFRAME.registerComponent("message-list", {
 
     const appendMessage = (info, index) =>{
       const message = info.message;
-
       const yPositionOfText = (CONTAINER_HEIGHT/2)-((LINE_HEIGHT/2)*index)-HEADER_HEIGHT;
-
       const text = document.createElement('a-entity');
+      const fullMessage = `${moment(info.time).fromNow()}  ${info.name}: ${message}`;
+      const maxMessageLength = 70;
 
-      text.setAttribute('text', `value: ${moment(info.time).fromNow()}  ${info.name}: ${message}; textAlign:center; width: 10; height:10; color: black; opacity:1;`);
-      text.setAttribute('position', `0 ${yPositionOfText} 0.001`);
+      console.log(fullMessage);
+      console.log(fullMessage.length);
+      console.log(maxMessageLength - fullMessage.length);
+
+      const leftAlignPosition =  ((MESSAGE_LIST_WIDTH / maxMessageLength) * (maxMessageLength - fullMessage.length) / 2)
+      console.log(leftAlignPosition);
+      text.setAttribute('text', `value: ${fullMessage};textAlign:center;`);
+
+      text.setAttribute('position', `-${leftAlignPosition} ${yPositionOfText} 0.001`);
       text.setAttribute('scale', '0.3 0.3 0');
       text.setAttribute('class', 'message-item');
 
@@ -49,7 +56,7 @@ AFRAME.registerComponent("message-list", {
     const channelHandler = new GroupChannelHandler();
 
     this.el.sceneEl.addEventListener("start-chat", async(e) => {
-      header.setAttribute('text', `value: ${sendbird.currentChannel.name}; textAlign:center; width: 10; height:10; color: black; opacity:1;`);
+      header.setAttribute('text', `value: ${sendbird.currentChannel.name};`);
 
       await sendbird.getMessages(sendbird.currentChannel);
       renderMessages(sendbird.messages);
