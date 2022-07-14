@@ -61,7 +61,7 @@ AFRAME.registerComponent("channel-list", {
         const channelListItem = document.createElement('a-entity');
   
         channelListItem.setAttribute('position', `0 ${CHANNEL_ITEM_TOP_POSITION} 0.0005`);
-        channelListItem.setAttribute('slice9', `opacity: 0.6;color: white;height:${CHANNEL_ITEM_HEIGHT-BORDER_WIDTH};width:${CHANNEL_LIST_WIDTH}`);
+        channelListItem.setAttribute('slice9', `opacity: 0.2;color: white;height:${CHANNEL_ITEM_HEIGHT-BORDER_WIDTH};width:${CHANNEL_LIST_WIDTH}`);
         channelListItem.setAttribute('position', `0 ${CHANNEL_ITEM_TOP_POSITION} 0.0005`);
   
         
@@ -72,8 +72,10 @@ AFRAME.registerComponent("channel-list", {
         button.setAttribute('is-remote-hover-target', '');
         button.setAttribute('tags', 'singleActionButton:true;');
         button.setAttribute('text-button', 'color', 'white');
-        button.setAttribute('text-button', 'backgroundColor', '#343434');
-        button.setAttribute('text-button', 'backgroundHoverColor', '#818181');
+        button.setAttribute('text-button', 'backgroundColor', '#f2f2f2');
+        button.setAttribute('text-button', 'backgroundHoverColor', '#ffffff');
+        button.setAttribute('position', '0 0 0.000035');
+
         button.setAttribute('scale', `${CHANNEL_LIST_WIDTH} ${CHANNEL_ITEM_HEIGHT-BORDER_WIDTH} 0`);
         button.object3D.addEventListener("interact", async ()=>{
           sendbird.currentChannel = channels[i];

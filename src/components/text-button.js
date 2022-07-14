@@ -55,6 +55,7 @@ AFRAME.registerComponent("text-button", {
   updateButtonState() {
     const hovering = this.hovering;
     this.el.setAttribute("slice9", "color", hovering ? this.data.backgroundHoverColor : this.data.backgroundColor);
+    this.el.setAttribute("slice9", "opacity", "0.9");
 
     if (this.textEl) {
       this.textEl.setAttribute("text", "color", hovering ? this.data.textHoverColor : this.data.textColor);
