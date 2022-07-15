@@ -55,15 +55,19 @@ AFRAME.registerComponent("keyboard-button", {
             console.log('sendbird.currentMessage', sendbird.currentMessage);
             this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });   
           case "32":
-            sendbird.currentMessage += " "
-            this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });
-
+            if(sendbird.currentMessage.length < 22){
+              sendbird.currentMessage += " "
+              this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });
+  
+              break;
+            }
             break;
+
           default:
-            console.log("clicked")
-            sendbird.currentMessage += this.keyboardButtonText.value;
-            this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });
-            // code block
+            if(sendbird.currentMessage.length < 22){
+              sendbird.currentMessage += this.keyboardButtonText.value;
+              this.el.sceneEl.emit("key-input", { value: sendbird.currentMessage });
+            }
         }
 
   

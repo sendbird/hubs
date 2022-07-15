@@ -5,10 +5,9 @@ import sendbird from '../utils/sendbird';
 import moment from 'moment';
 
 const MESSAGE_LIST_WIDTH = 0.8;
-const LINE_HEIGHT = 0.04;
-const CONTAINER_HEIGHT = LINE_HEIGHT*15;
+const LINE_HEIGHT = 0.06;
+const CONTAINER_HEIGHT = LINE_HEIGHT*10;
 const HEADER_HEIGHT = 0.02;
-const messages = [];
 
 AFRAME.registerComponent("message-list", {
   init() {
@@ -79,7 +78,7 @@ AFRAME.registerComponent("message-list", {
     const renderMessages = (messages)=>{
       this.el.querySelectorAll('.message-item').forEach(e => e.remove());
 
-      messages.slice(-20).forEach((message, index) => {
+      messages.slice(-19).forEach((message, index) => {
         const name = message.messageType === 'admin' ? 'admin' : message.sender.nickname;
         appendMessage({message:message.message, name, time: message.createdAt}, index);
 
