@@ -4,7 +4,7 @@ import {
 import sendbird from '../utils/sendbird';
 import moment from 'moment';
 
-const MESSAGE_LIST_WIDTH = 0.8;
+const MESSAGE_LIST_WIDTH = 0.86;
 const LINE_HEIGHT = 0.06;
 const CONTAINER_HEIGHT = LINE_HEIGHT*10;
 const HEADER_HEIGHT = 0.02;
@@ -39,19 +39,16 @@ AFRAME.registerComponent("message-list", {
 
       const leftAlignPosition =  ((MESSAGE_LIST_WIDTH / maxMessageLength) * (maxMessageLength - fullMessage.length) / 2)
       console.log(leftAlignPosition);
-      text.setAttribute('text', `value: ${fullMessage};textAlign:center;`);
+      text.setAttribute('text', `value: ${fullMessage};textAlign:center;color:white;`);
 
       text.setAttribute('position', `-${leftAlignPosition} ${yPositionOfText} 0.001`);
-      text.setAttribute('scale', '0.3 0.3 0');
+      text.setAttribute('scale', '0.32 0.32 0');
       text.setAttribute('class', 'message-item');
 
 
       this.el.appendChild(text);
     }
-    // this.el.sceneEl.addEventListener("incoming-message", (e)=>{
-    //   appendMessage(e, {name: 'James', time: '17:29'})
 
-    // });
     const channelHandler = new GroupChannelHandler();
 
     this.el.sceneEl.addEventListener("start-chat", async(e) => {
@@ -62,13 +59,10 @@ AFRAME.registerComponent("message-list", {
       channelHandler.onMessageReceived = (channel, message) => {
         console.log('got message')
         sendbird.messages.push(message);
-        // const name = message.sender?.nickname ? message.sender?.nickname : 'admin';
         renderMessages(sendbird.messages);
 
-        // appendMessage({message:message.message, name, time: message.createdAt});
       };
 
-      console.log("setup channel handler")
       sendbird.sdk.groupChannel.addGroupChannelHandler("98u089", channelHandler);
 
       this.el.setAttribute("visible","true");

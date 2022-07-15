@@ -6,7 +6,7 @@
 
  const KEYBOARD_PADDING = 0.02;
  const KEY_PADDING = 0.004;
- const KEY_SIZE = 0.06;
+ const KEY_SIZE = 0.07;
 
  AFRAME.registerComponent("keyboard", {
     schema: {
