@@ -12,7 +12,7 @@ AFRAME.registerComponent("keyboard-input", {
   
       const keyboardInputText = document.createElement('a-entity');
       keyboardInputText.setAttribute('text', `value: ${this.currentInput}; color:grey; textAlign:right; width: 200; height:200`);
-      keyboardInputText.setAttribute('position', '0.58 0.085 0.21');
+      keyboardInputText.setAttribute('position', '0.545 0.085 0.21');
       keyboardInputText.setAttribute('scale', '0.5 0.5 0.1');
   
       keyboardInputText.setAttribute('class', 'keyboard-button');
