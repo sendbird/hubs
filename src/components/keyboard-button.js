@@ -22,7 +22,7 @@ AFRAME.registerComponent("keyboard-button", {
             const worldPos = new THREE.Vector3();
             worldPos.setFromMatrixPosition(this.el.object3D.matrixWorld);
 
-            if(sendbird.currentMessage.includes('teleport')){
+            if(sendbird.currentMessage.includes('meet')){
               const targetUser = sendbird.currentMessage.split(" ")[1];
               const targetUserLatestMessage = sendbird.messages.reverse().find((message)=>message.nickname === targetUser.nickname);
 
@@ -62,7 +62,14 @@ AFRAME.registerComponent("keyboard-button", {
               break;
             }
             break;
+          case "16":
+              document.getElementById('keyboard').setAttribute("visible","false");
+              document.getElementById('keyboard-input').setAttribute("visible","false");
+              document.getElementById('message-list').setAttribute("visible","false");
+              document.getElementById('channel-list').setAttribute("visible","false");
 
+              break;
+  
           default:
             if(sendbird.currentMessage.length < 20){
               sendbird.currentMessage += this.keyboardButtonText.value;

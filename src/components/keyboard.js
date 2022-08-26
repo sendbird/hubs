@@ -5,8 +5,8 @@
  */
 
  const KEYBOARD_PADDING = 0.02;
- const KEY_PADDING = 0.004;
- const KEY_SIZE = 0.07;
+ const KEY_PADDING = 0.003;
+ const KEY_SIZE = 0.075;
 
  AFRAME.registerComponent("keyboard", {
     schema: {
@@ -22,7 +22,6 @@
             this.keyboardKeys = usKeyboardDefinition;
 
             if (this.keyboardKeys) {
-                console.log('keyboard: ', this.keyboardKeys);
                 const keyRows = this.keyboardKeys[this.activeMode] || this.keyboardKeys['normal'];
                 const keyboard = document.createElement('a-entity');
                 const keyboardWidth = KEY_SIZE * 11 + KEY_PADDING * 10 + KEYBOARD_PADDING * 2;
@@ -168,7 +167,7 @@
         // last one empty because Enter key spans 2 rows
       ],
       [
-        {value: 'Shift', type: 'shift'},
+        {value: 'Close', type: 'shift'},
         {value: 'z', type: 'standard'},
         {value: 'x', type: 'standard'},
         {value: 'c', type: 'standard'},

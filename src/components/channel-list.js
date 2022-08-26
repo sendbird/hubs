@@ -1,7 +1,6 @@
 import Sendbird, { UserUpdateParams } from '@sendbird/chat';
 import sendbird from '../utils/sendbird';
 
-console.log('555', Sendbird);
 
 const CHANNEL_LIST_WIDTH = 0.4;
 const CHANNEL_ITEM_HEIGHT = 0.08;
@@ -9,17 +8,17 @@ const BORDER_WIDTH = 0.002;
 
 AFRAME.registerComponent("channel-list", {
   init() {
-    this.sessionId = null;
-    this.el.sceneEl.addEventListener("presence_updated", (info) => {
-      console.log('info')
-      console.log(info)
-      const sessionId = info.detail.sessionId;
-      if(this.sessionId !== sessionId){
-        this.sessionId = sessionId;
-        setUpSendBird(info.detail.profile); 
+    this.profile = null;
+    // probably a better event we can hook into here
+    this.el.sceneEl.addEventListener("presence_updated", () => {
+      const profile = window.APP.store?.state?.profile;
+      if(profile){
+        this.profile = profile;
+        setUpSendBird(profile); 
       }
     });
     const setUpSendBird = async (profile) => {
+
       const sendbirdChat = await sendbird.getSdk();
       const response = await sendbird.createUser(profile.avatarId, profile.displayName);
 
@@ -29,8 +28,6 @@ AFRAME.registerComponent("channel-list", {
       }catch(e){
         console.log("sb connection failed", e)
       }
-
-      // await sendbirdChat.setChannelInvitationPreference(true);
 
 
       try {
@@ -73,6 +70,7 @@ AFRAME.registerComponent("channel-list", {
         button.setAttribute('tags', 'singleActionButton:true;');
         button.setAttribute('text-button', 'color', 'white');
         button.setAttribute('text-button', 'backgroundColor', '#f2f2f2');
+        
         button.setAttribute('text-button', 'backgroundHoverColor', '#ffffff');
         button.setAttribute('position', '0 0 0.000035');
 
@@ -81,7 +79,7 @@ AFRAME.registerComponent("channel-list", {
           sendbird.currentChannel = channels[i];
           console.log(sendbird.currentChannel);
           this.el.sceneEl.emit("start-chat",{});
-          this.el.setAttribute("visible","false")
+          this.el.setAttribute("visible","false");
     
         });
   

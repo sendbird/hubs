@@ -12,10 +12,18 @@ const HEADER_HEIGHT = 0.02;
 AFRAME.registerComponent("message-list", {
   init() {
     // listen for incomin messages
+    const keyboard = document.createElement('a-entity');
+
+    keyboard.setAttribute('position', `0 0 -0.01`);
+    keyboard.setAttribute('geometry', `primitive: plane; width: 0.8; height: 1`);
+    keyboard.setAttribute('material', 'color: #4a4a4a; side: double; opacity: 0.7');
+    this.el.appendChild(keyboard);
+
+
     const messageListContainer = document.createElement('a-entity');
 
-    messageListContainer.setAttribute('position', '0 0 0');
-    messageListContainer.setAttribute('slice9', `opacity: 0.8;color: 	#00ff99`);
+    messageListContainer.setAttribute('position', '0 0 -0.001');
+    messageListContainer.setAttribute('slice9', `opacity: 1; color: #8c6ef7`);
     messageListContainer.setAttribute('scale', `${MESSAGE_LIST_WIDTH} ${CONTAINER_HEIGHT} 0`);
 
     const header = document.createElement('a-entity');
@@ -24,7 +32,7 @@ AFRAME.registerComponent("message-list", {
     this.el.appendChild(header);
 
 
-    this.el.appendChild(messageListContainer);
+    // this.el.appendChild(messageListContainer);
 
     const appendMessage = (info, index) =>{
       const message = info.message;
@@ -33,15 +41,11 @@ AFRAME.registerComponent("message-list", {
       const fullMessage = `${moment(info.time).fromNow()}  ${info.name}: ${message}`;
       const maxMessageLength = 70;
 
-      console.log(fullMessage);
-      console.log(fullMessage.length);
-      console.log(maxMessageLength - fullMessage.length);
 
       const leftAlignPosition =  ((MESSAGE_LIST_WIDTH / maxMessageLength) * (maxMessageLength - fullMessage.length) / 2)
-      console.log(leftAlignPosition);
-      text.setAttribute('text', `value: ${fullMessage};textAlign:center;color:white;`);
+      text.setAttribute('text', `value: ${fullMessage};textAlign:center;color:#FFFFFF;alphaTest:0;`);
 
-      text.setAttribute('position', `-${leftAlignPosition} ${yPositionOfText} 0.001`);
+      text.setAttribute('position', `-${leftAlignPosition-0.1} ${yPositionOfText} 0`);
       text.setAttribute('scale', '0.32 0.32 0');
       text.setAttribute('class', 'message-item');
 
@@ -57,7 +61,6 @@ AFRAME.registerComponent("message-list", {
       await sendbird.getMessages(sendbird.currentChannel);
       renderMessages(sendbird.messages);
       channelHandler.onMessageReceived = (channel, message) => {
-        console.log('got message')
         sendbird.messages.push(message);
         renderMessages(sendbird.messages);
 
